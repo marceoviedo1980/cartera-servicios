@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscador de Servicios Médicos</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Buscador 2.0">
+    <link rel="apple-touch-icon" href="icon-192.png">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -94,7 +99,6 @@
 
         // Función para realizar la búsqueda
         function performSearch() {
-            // Verificar que hay datos cargados
             if (!servicesData || servicesData.length === 0) {
                 console.error('Los datos aún no se han cargado');
                 document.getElementById('results').innerHTML = '<p>Por favor, espere mientras se cargan los datos...</p>';
@@ -117,7 +121,6 @@
                 return;
             }
 
-            // Normalización de búsqueda
             const normalize = (str) => {
                 if (typeof str !== 'string') {
                     console.error('Error: El valor a normalizar no es una cadena de texto', str);
@@ -132,9 +135,7 @@
             const normalizedInput = normalize(input);
             const searchTerms = normalizedInput.split(' ').filter(term => term.length > 0);
 
-            // Filtrar los datos - buscar coincidencias para cada término
             const results = servicesData.filter(item => {
-                // Verificar que item.SERVICIO existe y es una cadena
                 if (!item || !item.SERVICIO || typeof item.SERVICIO !== 'string') {
                     console.error('Datos inválidos en el item:', item);
                     return false;
@@ -143,10 +144,8 @@
                 return searchTerms.every(term => normalizedService.includes(term));
             });
 
-            // Mostrar resultados
             if (results.length > 0) {
                 results.forEach(result => {
-                    // Verificar que el tipo de paciente existe
                     const tipoPaciente = result["TIPO DE PACIENTE"];
                     let tipoPacienteClass = '';
                     
@@ -172,25 +171,21 @@
             }
         }
 
-        // Cargar datos cuando el DOM esté listo
         document.addEventListener('DOMContentLoaded', function() {
-            // Mostrar mensaje de carga
             const resultsContainer = document.getElementById('results');
             if (resultsContainer) {
                 resultsContainer.innerHTML = '<p>Cargando datos...</p>';
             }
 
-            fetch('https://raw.githubusercontent.com/marceoviedo1980/cartera-servicios/main/cartera_servicios.json')
+            fetch('https://raw.githubusercontent.com/marceoviedo1980/cartera-servicios/main/cartera_servicios.json?v=' + Date.now())
                 .then(response => response.json())
                 .then(data => {
                     servicesData = data;
                     console.log('Datos cargados:', servicesData);
-                    // Limpiar mensaje de carga
                     if (resultsContainer) {
                         resultsContainer.innerHTML = '';
                     }
                     
-                    // Configurar el evento de búsqueda para la tecla Enter
                     const searchInput = document.getElementById('searchInput');
                     if (searchInput) {
                         searchInput.addEventListener('keypress', function(event) {
