@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Servicios Médicos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #00008B;
+        }
+        .subtitle {
+            font-size: 14px;
+            text-align: center;
+            margin: 5px 0;
+            color: #666666;
+        }
+        .hospital-title {
+            color: #000000;
+            font-size: 16px;
+        }
+        #searchInput {
+            width: calc(100% - 30px);
+            padding: 10px;
+            height: 40px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        button {
+            padding: 15px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #ff0000;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+        #results {
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333333;
+        }
+        .result-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+        }
+        .ambulatorio {
+            color: blue;
+        }
+        .internado {
+            color: red;
+        }
+        .codigo {
+            color: #006400;
+        }
+        .servicio {
+            color: #FF8C00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Buscador de Servicios Médicos</h1>
+        <p class="subtitle"><strong>Hospital Municipal La Portada</strong></p>
+        <p class="subtitle"><strong>Elaborado por: Marcelo Oviedo L.</strong></p>
+        <input type="text" id="searchInput" placeholder="Ingrese un término de búsqueda...">
+        <button onclick="performSearch()">Buscar</button>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        // Variable para almacenar los datos cargados
+        let servicesData = [];
+
+        // Función para realizar la búsqueda
+        function performSearch() {
+            // Verificar que hay datos cargados
+            if (!servicesData || servicesData.length === 0) {
+                console.error('Los datos aún no se han cargado');
+                document.getElementById('results').innerHTML = '<p>Por favor, espere mientras se cargan los datos...</p>';
+                return;
+            }
+
+            const searchInput = document.getElementById('searchInput');
+            const resultsContainer = document.getElementById('results');
+
+            if (!searchInput || !resultsContainer) {
+                console.error('No se encontraron los elementos necesarios');
+                return;
+            }
+
+            const input = searchInput.value.toLowerCase();
+            resultsContainer.innerHTML = '';
+
+            if (!input) {
+                resultsContainer.innerHTML = '<p>Por favor, ingrese un término para buscar.</p>';
+                return;
+            }
+
+            // Normalización de búsqueda
+            const normalize = (str) => {
+                if (typeof str !== 'string') {
+                    console.error('Error: El valor a normalizar no es una cadena de texto', str);
+                    return '';
+                }
+                return str
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .toLowerCase();
+            };
+
+            const normalizedInput = normalize(input);
+            const searchTerms = normalizedInput.split(' ').filter(term => term.length > 0);
+
+            // Filtrar los datos - buscar coincidencias para cada término
+            const results = servicesData.filter(item => {
+                // Verificar que item.SERVICIO existe y es una cadena
+                if (!item || !item.SERVICIO || typeof item.SERVICIO !== 'string') {
+                    console.error('Datos inválidos en el item:', item);
+                    return false;
+                }
+                const normalizedService = normalize(item.SERVICIO);
+                return searchTerms.every(term => normalizedService.includes(term));
+            });
+
+            // Mostrar resultados
+            if (results.length > 0) {
+                results.forEach(result => {
+                    // Verificar que el tipo de paciente existe
+                    const tipoPaciente = result["TIPO DE PACIENTE"];
+                    let tipoPacienteClass = '';
+                    
+                    if (tipoPaciente) {
+                        const tipoPacienteLower = tipoPaciente.toLowerCase();
+                        if (tipoPacienteLower === 'ambulatorio') {
+                            tipoPacienteClass = 'ambulatorio';
+                        } else if (tipoPacienteLower === 'internado') {
+                            tipoPacienteClass = 'internado';
+                        }
+                    }
+
+                    const resultItem = `
+                        <div class="result-item">
+                            <strong>- <span class="codigo">CODIGO:</span> ${result.CODIGO || ''}, <span class="servicio">SERVICIO:</span> ${result.SERVICIO || ''}</strong>, TIPO DE PACIENTE: 
+                            <span class="${tipoPacienteClass}">${result["TIPO DE PACIENTE"] || ''}</span>
+                        </div>
+                    `;
+                    resultsContainer.innerHTML += resultItem;
+                });
+            } else {
+                resultsContainer.innerHTML = '<p>No se encontraron servicios relacionados. Intente con otros términos.</p>';
+            }
+        }
+
+        // Cargar datos cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar mensaje de carga
+            const resultsContainer = document.getElementById('results');
+            if (resultsContainer) {
+                resultsContainer.innerHTML = '<p>Cargando datos...</p>';
+            }
+
+            fetch('https://raw.githubusercontent.com/marceoviedo1980/cartera-servicios/main/cartera_servicios.json')
+                .then(response => response.json())
+                .then(data => {
+                    servicesData = data;
+                    console.log('Datos cargados:', servicesData);
+                    // Limpiar mensaje de carga
+                    if (resultsContainer) {
+                        resultsContainer.innerHTML = '';
+                    }
+                    
+                    // Configurar el evento de búsqueda para la tecla Enter
+                    const searchInput = document.getElementById('searchInput');
+                    if (searchInput) {
+                        searchInput.addEventListener('keypress', function(event) {
+                            if (event.key === 'Enter') {
+                                performSearch();
+                            }
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos:', error);
+                    if (resultsContainer) {
+                        resultsContainer.innerHTML = '<p>Error al cargar los datos. Por favor, recargue la página.</p>';
+                    }
+                });
+        });
+    </script>
+</body>
+</html>

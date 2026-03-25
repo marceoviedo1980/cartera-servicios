@@ -1,0 +1,89 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  background: #ffffff;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Título centrado y en color azul oscuro */
+h1 {
+  text-align: center;
+  color: #00008B; /* Azul oscuro */
+}
+
+/* Textos adicionales debajo del título */
+.subtitle {
+  font-size: 14px;      /* Tamaño de fuente más pequeño */
+  text-align: center;   /* Centramos el texto */
+  margin: 5px 0;        /* Espaciado vertical */
+  color: #666666;       /* Color de texto por defecto */
+}
+
+/* Estilos específicos para "HOSPITAL MUNICIPAL LA PORTADA" */
+.hospital-title {
+  color: #000000;  /* Negro oscuro */
+  font-size: 16px; /* Un poco más grande que el resto de los subtítulos */
+}
+
+#searchInput {
+  width: calc(100% - 30px);
+  padding: 10px;
+  height: 40px; /* Aumenta la altura del input */
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+button {
+  padding: 15px 20px; /* Aumenta el padding para que el botón sea más alto */
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #ff0000; /* Botón de color rojo */
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #cc0000; /* Tono más oscuro al pasar el mouse */
+}
+
+#results {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333333;
+}
+
+.result-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+}
+
+/* Estilos para diferenciar el TIPO DE PACIENTE */
+.ambulatorio {
+  color: blue;
+}
+
+.internado {
+  color: red;
+}
+
+/* Estilos para las palabras "CODIGO" y "SERVICIO" */
+.codigo {
+  color: #006400; /* Verde oscuro */
+}
+
+.servicio {
+  color: #FF8C00; /* Naranja oscuro */
+}
