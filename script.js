@@ -2,7 +2,7 @@
 let servicesData = [];
 
 // Cargar datos del archivo JSON desde GitHub (enlace RAW)
-fetch('https://raw.githubusercontent.com/marceoviedo1980/cartera-servicios/main/cartera_servicios.json')
+fetch('https://raw.githubusercontent.com/marceoviedo1980/cartera-servicios/main/cartera_servicios.json?v=' + Date.now())
   .then(response => response.json())
   .then(data => {
     servicesData = data;
