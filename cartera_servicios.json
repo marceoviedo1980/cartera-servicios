@@ -3953,5 +3953,10 @@
   "CODIGO": "T20659002",
   "SERVICIO": "Aspiracion manual endouterina (AMEU)",
   "TIPO DE PACIENTE": "INTERNADO"
+ },
+ {
+  "CODIGO": "T24508007",
+  "SERVICIO": "Prevencion del distress respiratorio del recien nacido (maduracion pulmonar)",
+  "TIPO DE PACIENTE": "INTERNADO"
  }
 ]
