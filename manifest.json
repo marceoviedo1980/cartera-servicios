@@ -1,11 +1,13 @@
 {
-  "name": "Buscador de Servicios Médicos",
+  "name": "Buscador de Servicios Medicos",
   "short_name": "Buscador 2.0",
-  "description": "Hospital Municipal La Portada - Elaborado por Marcelo Oviedo L.",
+  "description": "Hospital Municipal La Portada - Desarrollado por : Marcelo Oviedo L.",
+  "id": "./",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#cc0000",
+  "background_color": "#eef4fb",
+  "theme_color": "#1668b7",
   "orientation": "portrait",
   "icons": [
     {

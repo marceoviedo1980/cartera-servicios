@@ -1,89 +1,411 @@
+:root {
+  color-scheme: light;
+  --bg: #eef4fb;
+  --surface: #ffffff;
+  --surface-soft: #f7fbff;
+  --text: #172033;
+  --muted: #60708a;
+  --line: #d7e2ef;
+  --blue: #1668b7;
+  --blue-dark: #0e4f91;
+  --blue-soft: #e6f1ff;
+  --amb: #07884f;
+  --amb-soft: #dff8eb;
+  --int: #b07900;
+  --int-soft: #fff2ce;
+  --dual: #6d37d8;
+  --shadow: 0 14px 36px rgba(22, 62, 104, 0.12);
+}
+
+body.dark {
+  color-scheme: dark;
+  --bg: #08111f;
+  --surface: #121c31;
+  --surface-soft: #17243c;
+  --text: #f5f8ff;
+  --muted: #b7c4d8;
+  --line: #2a3b58;
+  --blue: #2f8de4;
+  --blue-dark: #1c6fbd;
+  --blue-soft: #17375f;
+  --amb: #32d17d;
+  --amb-soft: #123b2b;
+  --int: #ffd447;
+  --int-soft: #443613;
+  --dual: #9b6cff;
+  --shadow: 0 14px 36px rgba(0, 0, 0, 0.32);
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
   margin: 0;
-  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.container {
-  max-width: 800px;
-  margin: 50px auto;
-  background: #ffffff;
-  padding: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+button,
+input {
+  font: inherit;
 }
 
-/* Título centrado y en color azul oscuro */
+.app-header {
+  background: linear-gradient(120deg, #0e4f91, #2076c9);
+  color: #ffffff;
+  box-shadow: 0 8px 22px rgba(14, 79, 145, 0.22);
+}
+
+.header-inner {
+  width: min(980px, 100%);
+  margin: 0 auto;
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 2px solid rgba(255, 255, 255, 0.76);
+  border-radius: 8px;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.13);
+}
+
 h1 {
-  text-align: center;
-  color: #00008B; /* Azul oscuro */
+  margin: 0;
+  font-size: clamp(19px, 4vw, 26px);
+  line-height: 1.1;
+  letter-spacing: 0;
 }
 
-/* Textos adicionales debajo del título */
-.subtitle {
-  font-size: 14px;      /* Tamaño de fuente más pequeño */
-  text-align: center;   /* Centramos el texto */
-  margin: 5px 0;        /* Espaciado vertical */
-  color: #666666;       /* Color de texto por defecto */
+.brand p {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.35;
 }
 
-/* Estilos específicos para "HOSPITAL MUNICIPAL LA PORTADA" */
-.hospital-title {
-  color: #000000;  /* Negro oscuro */
-  font-size: 16px; /* Un poco más grande que el resto de los subtítulos */
+.theme-toggle {
+  min-width: 78px;
+  min-height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.52);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.app-shell {
+  width: min(980px, 100%);
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.search-section {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.search-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.search-field {
+  position: relative;
 }
 
 #searchInput {
-  width: calc(100% - 30px);
-  padding: 10px;
-  height: 40px; /* Aumenta la altura del input */
-  margin-bottom: 20px;
-  font-size: 16px;
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 42px 11px 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-soft);
+  color: var(--text);
+  outline: none;
 }
 
-button {
-  padding: 15px 20px; /* Aumenta el padding para que el botón sea más alto */
-  font-size: 16px;
+#searchInput:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(47, 141, 228, 0.18);
+}
+
+.clear-button {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
   cursor: pointer;
-  background-color: #ff0000; /* Botón de color rojo */
+}
+
+.clear-button:hover {
+  background: var(--blue-soft);
+  color: var(--text);
+}
+
+.search-button {
+  min-height: 48px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 22px;
+  background: var(--blue);
   color: #ffffff;
-  border: none;
-  border-radius: 5px;
+  font-weight: 800;
+  cursor: pointer;
 }
 
-button:hover {
-  background-color: #cc0000; /* Tono más oscuro al pasar el mouse */
+.search-button:hover {
+  background: var(--blue-dark);
 }
 
-#results {
-  margin-top: 20px;
+.section-divider {
+  height: 1px;
+  margin: 15px 0;
+  background: var(--line);
+}
+
+.section-title,
+.filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.section-title span,
+.filter-label {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.recent-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.recent-chip,
+.filter-chip {
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 12px;
+  background: var(--surface-soft);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.filter-chip.active {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 50%;
+}
+
+.dot-amb {
+  background: var(--amb);
+}
+
+.dot-int {
+  background: var(--int);
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 14px 0;
+  color: var(--muted);
   font-size: 14px;
-  line-height: 1.5;
-  color: #333333;
 }
 
-.result-item {
-  margin-bottom: 10px;
-  padding: 10px;
-  background: #f9f9f9;
-  border: 1px solid #dddddd;
-  border-radius: 5px;
+.status-row p {
+  margin: 0;
 }
 
-/* Estilos para diferenciar el TIPO DE PACIENTE */
-.ambulatorio {
-  color: blue;
+.data-status {
+  display: none;
 }
 
-.internado {
-  color: red;
+.data-status.visible {
+  display: block;
 }
 
-/* Estilos para las palabras "CODIGO" y "SERVICIO" */
-.codigo {
-  color: #006400; /* Verde oscuro */
+.results {
+  display: grid;
+  gap: 10px;
 }
 
-.servicio {
-  color: #FF8C00; /* Naranja oscuro */
+.group-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0 2px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.group-divider::before,
+.group-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: var(--line);
+}
+
+.result-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.result-card.amb-only {
+  border-left-color: var(--amb);
+}
+
+.result-card.int-only {
+  border-left-color: var(--int);
+}
+
+.result-card.dual {
+  border-left-color: var(--dual);
+}
+
+.code-badge {
+  min-width: 62px;
+  padding: 8px 9px;
+  border-radius: 7px;
+  background: var(--blue);
+  color: #ffffff;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+body.dark .code-badge {
+  color: #ffffff;
+}
+
+.service-name {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.patient-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.tag.ambulatorio {
+  background: var(--amb-soft);
+  color: var(--amb);
+}
+
+.tag.internado {
+  background: var(--int-soft);
+  color: var(--int);
+}
+
+.empty-state {
+  padding: 28px 14px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  text-align: center;
+  background: var(--surface);
+}
+
+mark {
+  border-radius: 3px;
+  background: #fff099;
+  color: #171717;
+  padding: 0 2px;
+}
+
+@media (max-width: 640px) {
+  .header-inner,
+  .brand {
+    align-items: flex-start;
+  }
+
+  .search-row,
+  .result-card,
+  .status-row {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+
+  .code-badge {
+    width: fit-content;
+  }
 }

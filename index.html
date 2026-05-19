@@ -1,217 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscador de Servicios Médicos</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Buscador 2.0">
-    <link rel="apple-touch-icon" href="icon-192.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscador de Servicios Medicos</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1668b7">
+  <meta name="description" content="Buscador de Servicios Medicos del Hospital Municipal La Portada">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Buscador 2.0">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css">
 
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BDRL6VX3YR"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-BDRL6VX3YR');
-    </script>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background: #ffffff;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #00008B;
-        }
-        .subtitle {
-            font-size: 14px;
-            text-align: center;
-            margin: 5px 0;
-            color: #666666;
-        }
-        .hospital-title {
-            color: #000000;
-            font-size: 16px;
-        }
-        #searchInput {
-            width: calc(100% - 30px);
-            padding: 10px;
-            height: 40px;
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-        button {
-            padding: 15px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #ff0000;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #cc0000;
-        }
-        #results {
-            margin-top: 20px;
-            font-size: 14px;
-            line-height: 1.5;
-            color: #333333;
-        }
-        .result-item {
-            margin-bottom: 10px;
-            padding: 10px;
-            background: #f9f9f9;
-            border: 1px solid #dddddd;
-            border-radius: 5px;
-        }
-        .ambulatorio {
-            color: blue;
-        }
-        .internado {
-            color: red;
-        }
-        .codigo {
-            color: #006400;
-        }
-        .servicio {
-            color: #FF8C00;
-        }
-    </style>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BDRL6VX3YR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BDRL6VX3YR');
+  </script>
 </head>
 <body>
-    <div class="container">
-        <h1>Buscador de Servicios Médicos</h1>
-        <p class="subtitle"><strong>Hospital Municipal La Portada</strong></p>
-        <p class="subtitle"><strong>Elaborado por: Marcelo Oviedo L.</strong></p>
-        <input type="search" id="searchInput" placeholder="Ingrese un término de búsqueda..." autocomplete="off">
-        <button onclick="performSearch()">Buscar</button>
-        <div id="results"></div>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">H+</div>
+        <div>
+          <h1>Buscador de Servicios Medicos</h1>
+          <p>Hospital Municipal La Portada · Desarrollado por : Marcelo Oviedo L.</p>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar modo">
+        <span id="themeIcon">🌙</span>
+        <span id="themeLabel">OSC</span>
+      </button>
     </div>
+  </header>
 
-    <script>
-        // Variable para almacenar los datos cargados
-        let servicesData = [];
+  <main class="app-shell">
+    <section class="search-section" aria-label="Busqueda">
+      <form class="search-form" id="searchForm">
+        <label for="searchInput">Buscar por diagnostico, servicio o codigo</label>
+        <div class="search-row">
+          <div class="search-field">
+            <input id="searchInput" type="search" placeholder="Ej: infeccion, A09, bronquitis..." autocomplete="off">
+            <button class="clear-button" id="clearButton" type="button" aria-label="Limpiar busqueda">✕</button>
+          </div>
+          <button class="search-button" type="submit">Buscar</button>
+        </div>
+      </form>
 
-        // Función para realizar la búsqueda
-        function performSearch() {
-            if (!servicesData || servicesData.length === 0) {
-                console.error('Los datos aún no se han cargado');
-                document.getElementById('results').innerHTML = '<p>Por favor, espere mientras se cargan los datos...</p>';
-                return;
-            }
+      <div class="section-divider"></div>
 
-            const searchInput = document.getElementById('searchInput');
-            const resultsContainer = document.getElementById('results');
+      <div class="recent-block" id="recentBlock" hidden>
+        <div class="section-title">
+          <span>Busquedas recientes</span>
+        </div>
+        <div class="recent-list" id="recentList"></div>
+      </div>
 
-            if (!searchInput || !resultsContainer) {
-                console.error('No se encontraron los elementos necesarios');
-                return;
-            }
+      <div class="section-divider"></div>
 
-            const input = searchInput.value.toLowerCase();
-            resultsContainer.innerHTML = '';
+      <div class="filters" aria-label="Filtros de tipo de paciente">
+        <span class="filter-label">Filtrar</span>
+        <button class="filter-chip active" type="button" data-filter="todos">Todos</button>
+        <button class="filter-chip" type="button" data-filter="ambulatorio">
+          <span class="dot dot-amb"></span>Ambulatorio
+        </button>
+        <button class="filter-chip" type="button" data-filter="internado">
+          <span class="dot dot-int"></span>Internado
+        </button>
+      </div>
+    </section>
 
-            if (!input) {
-                resultsContainer.innerHTML = '<p>Por favor, ingrese un término para buscar.</p>';
-                return;
-            }
+    <section class="status-row" aria-live="polite">
+      <p id="resultCounter">Ingrese un termino y presione Buscar.</p>
+      <p id="dataStatus" class="data-status visible">Cargando datos...</p>
+    </section>
 
-            const normalize = (str) => {
-                if (typeof str !== 'string') {
-                    console.error('Error: El valor a normalizar no es una cadena de texto', str);
-                    return '';
-                }
-                return str
-                    .normalize('NFD')
-                    .replace(/[\u0300-\u036f]/g, '')
-                    .toLowerCase();
-            };
+    <section id="results" class="results" aria-label="Resultados"></section>
+  </main>
 
-            const normalizedInput = normalize(input);
-            const searchTerms = normalizedInput.split(' ').filter(term => term.length > 0);
-
-            const results = servicesData.filter(item => {
-                if (!item || !item.SERVICIO || typeof item.SERVICIO !== 'string') {
-                    console.error('Datos inválidos en el item:', item);
-                    return false;
-                }
-                const normalizedService = normalize(item.SERVICIO);
-                return searchTerms.every(term => normalizedService.includes(term));
-            });
-
-            if (results.length > 0) {
-                results.forEach(result => {
-                    const tipoPaciente = result["TIPO DE PACIENTE"];
-                    let tipoPacienteClass = '';
-                    
-                    if (tipoPaciente) {
-                        const tipoPacienteLower = tipoPaciente.toLowerCase();
-                        if (tipoPacienteLower === 'ambulatorio') {
-                            tipoPacienteClass = 'ambulatorio';
-                        } else if (tipoPacienteLower === 'internado') {
-                            tipoPacienteClass = 'internado';
-                        }
-                    }
-
-                    const resultItem = `
-                        <div class="result-item">
-                            <strong>- <span class="codigo">CODIGO:</span> ${result.CODIGO || ''}, <span class="servicio">SERVICIO:</span> ${result.SERVICIO || ''}</strong>, TIPO DE PACIENTE: 
-                            <span class="${tipoPacienteClass}">${result["TIPO DE PACIENTE"] || ''}</span>
-                        </div>
-                    `;
-                    resultsContainer.innerHTML += resultItem;
-                });
-            } else {
-                resultsContainer.innerHTML = '<p>No se encontraron servicios relacionados. Intente con otros términos.</p>';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const resultsContainer = document.getElementById('results');
-            if (resultsContainer) {
-                resultsContainer.innerHTML = '<p>Cargando datos...</p>';
-            }
-
-            fetch('https://raw.githubusercontent.com/marceoviedo1980/cartera-servicios/main/cartera_servicios.json?v=' + Date.now())
-                .then(response => response.json())
-                .then(data => {
-                    servicesData = data;
-                    console.log('Datos cargados:', servicesData);
-                    if (resultsContainer) {
-                        resultsContainer.innerHTML = '';
-                    }
-                    
-                    const searchInput = document.getElementById('searchInput');
-                    if (searchInput) {
-                        searchInput.addEventListener('keypress', function(event) {
-                            if (event.key === 'Enter') {
-                                performSearch();
-                            }
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error al cargar los datos:', error);
-                    if (resultsContainer) {
-                        resultsContainer.innerHTML = '<p>Error al cargar los datos. Por favor, recargue la página.</p>';
-                    }
-                });
-        });
-    </script>
+  <script src="script.js"></script>
 </body>
 </html>
