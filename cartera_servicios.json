@@ -1275,6 +1275,11 @@
   "TIPO DE PACIENTE": "AMBULATORIO"
  },
  {
+  "CODIGO": "N75.1",
+  "SERVICIO": "Absceso de la glandula de Bartholin",
+  "TIPO DE PACIENTE": "INTERNADO"
+ },
+  {
   "CODIGO": "N76.0",
   "SERVICIO": "Vaginitis aguda",
   "TIPO DE PACIENTE": "AMBULATORIO"
