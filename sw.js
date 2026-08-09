@@ -1,4 +1,4 @@
-const CACHE_NAME = "cartera-servicios-v2-azul";
+const CACHE_NAME = "cartera-servicios-v3-azul";
 const APP_SHELL = [
   "./",
   "./index.html",
