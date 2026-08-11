@@ -895,6 +895,11 @@
   "TIPO DE PACIENTE": "AMBULATORIO"
  },
  {
+  "CODIGO": "L03.8",
+  "SERVICIO": "Celulitis de otros sitios",
+  "TIPO DE PACIENTE": "INTERNADO"
+ },
+ {
   "CODIGO": "L20",
   "SERVICIO": "Dermatitis atopica",
   "TIPO DE PACIENTE": "AMBULATORIO"
