@@ -95,6 +95,7 @@ function groupDualDiagnostics(items) {
       grouped.set(key, {
         codigo: code,
         servicio: service,
+        clase: String(item.CLASE || "").trim().toUpperCase(),
         modalidades: new Set()
       });
     }
@@ -106,6 +107,7 @@ function groupDualDiagnostics(items) {
   return [...grouped.values()].map((item) => ({
     codigo: item.codigo,
     servicio: item.servicio,
+    clase: item.clase,
     modalidades: [...item.modalidades]
   }));
 }
@@ -190,6 +192,14 @@ function renderResults(results, query) {
 
       const code = createElement("div", "code-badge", item.codigo || "S/C");
       const content = createElement("div", "result-content");
+
+      const esProc = item.clase === "PROCEDIMIENTO";
+      const claseBadge = createElement(
+        "span",
+        `clase-badge ${esProc ? "proc" : "diag"}`,
+        esProc ? "🔧 PROCEDIMIENTO" : "🩺 DIAGNÓSTICO"
+      );
+
       const title = createElement("p", "service-name");
       title.append(highlight(item.servicio, query));
 
@@ -199,7 +209,7 @@ function renderResults(results, query) {
         tags.append(createElement("span", `tag ${modality}`, label));
       });
 
-      content.append(title, tags);
+      content.append(claseBadge, title, tags);
       card.append(code, content);
       elements.results.append(card);
     });
