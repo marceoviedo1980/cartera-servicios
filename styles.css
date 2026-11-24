@@ -436,3 +436,9 @@ mark {
     width: fit-content;
   }
 }
+
+/* Ocultar la X nativa del buscador (la app ya tiene su propio boton de limpiar) */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  display: none;
+}

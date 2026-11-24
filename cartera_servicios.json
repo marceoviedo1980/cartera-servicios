@@ -2989,7 +2989,7 @@
  },
  {
   "CODIGO": "L06608025",
-  "SERVICIO": "Gamma glutamil transferasa (ggt)",
+  "SERVICIO": "Gamma glutamil transferasa (GGT)",
   "CLASE": "PROCEDIMIENTO",
   "TIPO DE PACIENTE": "AMBULATORIO"
  },
@@ -3277,7 +3277,7 @@
  },
  {
   "CODIGO": "L06613043",
-  "SERVICIO": "Tsh",
+  "SERVICIO": "TSH",
   "CLASE": "PROCEDIMIENTO",
   "TIPO DE PACIENTE": "AMBULATORIO"
  },
@@ -3367,7 +3367,7 @@
  },
  {
   "CODIGO": "L06617012",
-  "SERVICIO": "Técnica de graham",
+  "SERVICIO": "Técnica de Graham",
   "CLASE": "PROCEDIMIENTO",
   "TIPO DE PACIENTE": "AMBULATORIO"
  },
@@ -4759,13 +4759,13 @@
  },
  {
   "CODIGO": "P07504002",
-  "SERVICIO": "Control de diu",
+  "SERVICIO": "Control de DIU",
   "CLASE": "PROCEDIMIENTO",
   "TIPO DE PACIENTE": "AMBULATORIO"
  },
  {
   "CODIGO": "P07504003",
-  "SERVICIO": "Inserción de diu",
+  "SERVICIO": "Inserción de DIU",
   "CLASE": "PROCEDIMIENTO",
   "TIPO DE PACIENTE": "AMBULATORIO"
  },
@@ -4789,7 +4789,7 @@
  },
  {
   "CODIGO": "P07504012",
-  "SERVICIO": "Retiro de diu",
+  "SERVICIO": "Retiro de DIU",
   "CLASE": "PROCEDIMIENTO",
   "TIPO DE PACIENTE": "AMBULATORIO"
  },
@@ -5245,13 +5245,13 @@
  },
  {
   "CODIGO": "PC81-UTI",
-  "SERVICIO": "Uti",
+  "SERVICIO": "UTI",
   "CLASE": "PROCEDIMIENTO",
   "TIPO DE PACIENTE": "AMBULATORIO"
  },
  {
   "CODIGO": "PC82-UCIN",
-  "SERVICIO": "Ucin",
+  "SERVICIO": "UCIN",
   "CLASE": "PROCEDIMIENTO",
   "TIPO DE PACIENTE": "AMBULATORIO"
  },
@@ -7555,7 +7555,7 @@
  },
  {
   "CODIGO": "U07",
-  "SERVICIO": "Covid-19",
+  "SERVICIO": "COVID-19",
   "CLASE": "DIAGNOSTICO",
   "TIPO DE PACIENTE": "AMBULATORIO"
  },
